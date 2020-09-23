@@ -4,6 +4,12 @@ variable "allowed_security_group_ids" {
   description = "Allow these security groups to the resources created in this module"
 }
 
+variable "allowed_cidrs" {
+  type        = list(string)
+  default     = []
+  description = "Allow these CIDRs to the resources created in this module"
+}
+
 variable "engine" {
   type        = string
   default     = "redis"
