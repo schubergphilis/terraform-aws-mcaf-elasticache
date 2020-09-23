@@ -28,4 +28,11 @@ resource "aws_security_group" "elasticache" {
     security_groups = var.allowed_security_group_ids
     protocol        = "tcp"
   }
+
+  ingress {
+    from_port   = 6379
+    to_port     = 6379
+    cidr_blocks = var.allowed_cidrs
+    protocol    = "tcp"
+  }
 }
