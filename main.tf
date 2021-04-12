@@ -14,7 +14,7 @@ resource "aws_elasticache_cluster" "default" {
   security_group_ids   = [aws_security_group.elasticache.id]
   parameter_group_name = var.parameter_group_name
   engine_version       = var.engine_version
-  port                 = 6379
+  port                 = var.port
   tags                 = var.tags
 }
 
@@ -52,7 +52,7 @@ resource "aws_elasticache_replication_group" "default" {
   node_type                     = var.node_type
   number_cache_clusters         = var.num_cache_nodes
   parameter_group_name          = "default.${var.engine}${var.engine_version}"
-  port                          = 6379
+  port                          = var.port
   replication_group_description = "${var.name} replication group."
   replication_group_id          = "${var.name}-replication-group"
   security_group_ids            = [aws_security_group.elasticache.id]

@@ -74,6 +74,12 @@ variable "parameter_group_name" {
   description = "The parameter group to use for the elasticache cluster"
 }
 
+variable "port" {
+  type        = number
+  default     = 6379
+  description = "The port to use for the elasticache cluster"
+}
+
 variable "private_subnet_ids" {
   type        = list(string)
   description = "The private subnets of the VPC"

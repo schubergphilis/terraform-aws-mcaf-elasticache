@@ -6,6 +6,4 @@ output "endpoints" {
   value = aws_elasticache_cluster.default.cache_nodes.*.address
 }
 
-output "ports" {
-  value = aws_elasticache_cluster.default.cache_nodes.*.port
 }
