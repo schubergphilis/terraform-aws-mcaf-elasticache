@@ -1,3 +1,15 @@
+variable "availability_zones" {
+  type        = list(string)
+  default     = []
+  description = "The availability zones to place the cache nodes"
+}
+
+variable "at_rest_encryption" {
+  type        = bool
+  default     = false
+  description = "If set it will enable encryption of the data while stored"
+}
+
 variable "allowed_security_group_ids" {
   type        = list(string)
   default     = []
@@ -22,6 +34,18 @@ variable "engine_version" {
   description = "Engine version to use in the elasticache cluster"
 }
 
+variable "in_transit_encryption" {
+  type        = bool
+  default     = false
+  description = "If set it will enable SSL between client and server"
+}
+
+variable "kms_key_id" {
+  type        = string
+  default     = null
+  description = "The KMS key ID used for the at-rest encryption"
+}
+
 variable "name" {
   type        = string
   description = "The name of the elasticache cluster"
@@ -37,6 +61,11 @@ variable "num_cache_nodes" {
   type        = number
   default     = 1
   description = "The number of nodes to use in the elasticache cluster"
+}
+
+variable "auth_token" {
+  type        = string
+  description = "The auth_token when using in-transit encryption"
 }
 
 variable "parameter_group_name" {
