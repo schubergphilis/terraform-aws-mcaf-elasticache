@@ -48,7 +48,7 @@ resource "aws_elasticache_replication_group" "default" {
   availability_zones            = var.availability_zones
   engine                        = var.engine
   engine_version                = var.engine_version
-  kms_key_id                    = var.at_rest_encryption ? var.kms_key_id : null
+  kms_key_id                    = var.at_rest_encryption ? var.kms_key_arn : null
   node_type                     = var.node_type
   number_cache_clusters         = var.num_cache_nodes
   parameter_group_name          = "default.${var.engine}${var.engine_version}"
@@ -56,6 +56,7 @@ resource "aws_elasticache_replication_group" "default" {
   replication_group_description = "${var.name} replication group."
   replication_group_id          = "${var.name}-replication-group"
   security_group_ids            = [aws_security_group.elasticache.id]
+  subnet_group_name             = aws_elasticache_subnet_group.default.name
   tags                          = var.tags
   transit_encryption_enabled    = var.in_transit_encryption
 

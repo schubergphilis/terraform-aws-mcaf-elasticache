@@ -30,7 +30,7 @@ variable "engine" {
 
 variable "engine_version" {
   type        = string
-  default     = "5.0.6"
+  default     = "6.x"
   description = "Engine version to use in the elasticache cluster"
 }
 
@@ -40,10 +40,10 @@ variable "in_transit_encryption" {
   description = "If set it will enable SSL between client and server"
 }
 
-variable "kms_key_id" {
+variable "kms_key_arn" {
   type        = string
   default     = null
-  description = "The KMS key ID used for the at-rest encryption"
+  description = "The KMS key ARN used for the at-rest encryption"
 }
 
 variable "name" {
@@ -70,7 +70,7 @@ variable "auth_token" {
 
 variable "parameter_group_name" {
   type        = string
-  default     = "default.redis5.0"
+  default     = "default.redis6.x"
   description = "The parameter group to use for the elasticache cluster"
 }
 
