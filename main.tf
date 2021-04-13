@@ -44,6 +44,7 @@ resource "aws_elasticache_replication_group" "default" {
 
   at_rest_encryption_enabled    = var.at_rest_encryption
   auth_token                    = var.in_transit_encryption ? var.auth_token : null
+  auto_minor_version_upgrade    = true
   automatic_failover_enabled    = true
   availability_zones            = var.availability_zones
   engine                        = var.engine
