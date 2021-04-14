@@ -85,6 +85,12 @@ variable "private_subnet_ids" {
   description = "The private subnets of the VPC"
 }
 
+variable "replication_group" {
+  type = bool
+  default = false
+  description = "Creates a replication group instead of a single-node instance"
+}
+
 variable "tags" {
   type        = map(string)
   description = "A mapping of tags to assign to the resources"

@@ -4,7 +4,7 @@ resource "aws_elasticache_subnet_group" "default" {
 }
 
 resource "aws_elasticache_cluster" "default" {
-  count = var.num_cache_nodes == 1 ? 1 : 0
+  count = var.replication_group ? 0 : 1
 
   cluster_id           = var.name
   engine               = var.engine
@@ -16,6 +16,10 @@ resource "aws_elasticache_cluster" "default" {
   engine_version       = var.engine_version
   port                 = var.port
   tags                 = var.tags
+
+  lifecycle {
+    ignore_changes = [engine_version]
+  }
 }
 
 resource "aws_security_group" "elasticache" {
@@ -40,12 +44,12 @@ resource "aws_security_group" "elasticache" {
 }
 
 resource "aws_elasticache_replication_group" "default" {
-  count = var.num_cache_nodes > 1 ? 1 : 0
+  count = var.replication_group ? 1 : 0
 
   at_rest_encryption_enabled    = var.at_rest_encryption
   auth_token                    = var.in_transit_encryption ? var.auth_token : null
   auto_minor_version_upgrade    = true
-  automatic_failover_enabled    = true
+  automatic_failover_enabled    = var.num_cache_nodes > 1 ? true : false
   availability_zones            = var.availability_zones
   engine                        = var.engine
   engine_version                = var.engine_version
