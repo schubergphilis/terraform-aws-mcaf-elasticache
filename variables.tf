@@ -1,13 +1,7 @@
-variable "availability_zones" {
+variable "allowed_cidrs" {
   type        = list(string)
   default     = []
-  description = "The availability zones to place the cache nodes"
-}
-
-variable "at_rest_encryption" {
-  type        = bool
-  default     = false
-  description = "If set it will enable encryption of the data while stored"
+  description = "Allow these CIDRs to the resources created in this module"
 }
 
 variable "allowed_security_group_ids" {
@@ -16,10 +10,16 @@ variable "allowed_security_group_ids" {
   description = "Allow these security groups to the resources created in this module"
 }
 
-variable "allowed_cidrs" {
+variable "at_rest_encryption" {
+  type        = bool
+  default     = false
+  description = "If set it will enable encryption of the data while stored"
+}
+
+variable "availability_zones" {
   type        = list(string)
   default     = []
-  description = "Allow these CIDRs to the resources created in this module"
+  description = "The availability zones to place the cache nodes"
 }
 
 variable "engine" {
@@ -86,8 +86,8 @@ variable "private_subnet_ids" {
 }
 
 variable "replication_group" {
-  type = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Creates a replication group instead of a single-node instance"
 }
 
