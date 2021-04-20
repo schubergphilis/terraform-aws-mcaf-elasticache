@@ -12,13 +12,19 @@ variable "allowed_security_group_ids" {
 
 variable "at_rest_encryption" {
   type        = bool
-  default     = false
+  default     = null
   description = "If set it will enable encryption of the data while stored"
+}
+
+variable "auth_token" {
+  type        = string
+  description = "Auth token for password protecting redis, `in_transit_encryption` must be set to `true`. Password must be longer than 16 chars"
+  default     = null
 }
 
 variable "availability_zones" {
   type        = list(string)
-  default     = []
+  default     = null
   description = "The availability zones to place the cache nodes"
 }
 
@@ -36,7 +42,7 @@ variable "engine_version" {
 
 variable "in_transit_encryption" {
   type        = bool
-  default     = false
+  default     = null
   description = "If set it will enable SSL between client and server"
 }
 
@@ -63,10 +69,6 @@ variable "num_cache_nodes" {
   description = "The number of nodes to use in the elasticache cluster"
 }
 
-variable "auth_token" {
-  type        = string
-  description = "The auth_token when using in-transit encryption"
-}
 
 variable "parameter_group_name" {
   type        = string

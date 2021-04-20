@@ -47,13 +47,13 @@ resource "aws_elasticache_replication_group" "default" {
   count = var.replication_group ? 1 : 0
 
   at_rest_encryption_enabled    = var.at_rest_encryption
-  auth_token                    = var.in_transit_encryption ? var.auth_token : null
+  auth_token                    = var.auth_token
   auto_minor_version_upgrade    = true
-  automatic_failover_enabled    = var.num_cache_nodes > 1 ? true : false
+  automatic_failover_enabled    = var.num_cache_nodes > 1
   availability_zones            = var.availability_zones
   engine                        = var.engine
   engine_version                = var.engine_version
-  kms_key_id                    = var.at_rest_encryption ? var.kms_key_arn : null
+  kms_key_id                    = var.kms_key_arn
   node_type                     = var.node_type
   number_cache_clusters         = var.num_cache_nodes
   parameter_group_name          = "default.${var.engine}${var.engine_version}"
