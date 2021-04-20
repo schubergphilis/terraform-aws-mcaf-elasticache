@@ -18,8 +18,8 @@ variable "at_rest_encryption" {
 
 variable "auth_token" {
   type        = string
-  description = "Auth token for password protecting redis, `in_transit_encryption` must be set to `true`. Password must be longer than 16 chars"
   default     = null
+  description = "Password used to access a password protected server"
 }
 
 variable "availability_zones" {
@@ -68,7 +68,6 @@ variable "num_cache_nodes" {
   default     = 1
   description = "The number of nodes to use in the elasticache cluster"
 }
-
 
 variable "parameter_group_name" {
   type        = string
