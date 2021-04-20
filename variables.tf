@@ -1,13 +1,31 @@
+variable "allowed_cidrs" {
+  type        = list(string)
+  default     = []
+  description = "Allow these CIDRs to the resources created in this module"
+}
+
 variable "allowed_security_group_ids" {
   type        = list(string)
   default     = []
   description = "Allow these security groups to the resources created in this module"
 }
 
-variable "allowed_cidrs" {
+variable "at_rest_encryption" {
+  type        = bool
+  default     = null
+  description = "If set it will enable encryption of the data while stored"
+}
+
+variable "auth_token" {
+  type        = string
+  description = "Auth token for password protecting redis, `in_transit_encryption` must be set to `true`. Password must be longer than 16 chars"
+  default     = null
+}
+
+variable "availability_zones" {
   type        = list(string)
-  default     = []
-  description = "Allow these CIDRs to the resources created in this module"
+  default     = null
+  description = "The availability zones to place the cache nodes"
 }
 
 variable "engine" {
@@ -18,8 +36,20 @@ variable "engine" {
 
 variable "engine_version" {
   type        = string
-  default     = "5.0.6"
+  default     = "6.x"
   description = "Engine version to use in the elasticache cluster"
+}
+
+variable "in_transit_encryption" {
+  type        = bool
+  default     = null
+  description = "If set it will enable SSL between client and server"
+}
+
+variable "kms_key_arn" {
+  type        = string
+  default     = null
+  description = "The KMS key ARN used for the at-rest encryption"
 }
 
 variable "name" {
@@ -39,15 +69,28 @@ variable "num_cache_nodes" {
   description = "The number of nodes to use in the elasticache cluster"
 }
 
+
 variable "parameter_group_name" {
   type        = string
-  default     = "default.redis5.0"
+  default     = "default.redis6.x"
   description = "The parameter group to use for the elasticache cluster"
+}
+
+variable "port" {
+  type        = number
+  default     = 6379
+  description = "The port to use for the elasticache cluster"
 }
 
 variable "private_subnet_ids" {
   type        = list(string)
   description = "The private subnets of the VPC"
+}
+
+variable "replication_group" {
+  type        = bool
+  default     = false
+  description = "Creates a replication group instead of a single-node instance"
 }
 
 variable "tags" {
